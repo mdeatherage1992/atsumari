@@ -1,0 +1,40 @@
+ 
+<h1> Room New </h1>
+<% if !current_user.profile %>
+<h1>Please Create a Profile First</h1>
+<% end %>
+
+<% if current_user.profile && current_user.profile.experience_in_industry.to_i < 2 %>
+<div class="shinpi-headings">
+<h2>You cannot create a Room for that yet. Your years of experience must be longer than <%= current_user.profile.experience_in_industry %> year </h2>
+<div>
+<% end %>
+<% if current_user.profile && current_user.profile.experience_in_industry.to_i > 2 %>
+<div class="shinpi-headings">
+<h1>Room Application</h1>
+<%= form_for(@room) do |f| %>
+<div class="room-form">
+<br>
+<h4>Room Type:</h4>
+<%= f.text_area :room_type, class: 'form-control' %>
+<br>
+<h4>Room Name:</h4>
+<%= f.text_area :name, class:"form-control", id:"room-tango"  %>
+<br>
+<h4>Room Description:</h4>
+<%= f.text_area :description, class:"form-control"  %>
+<br>
+<h4>Room Thumbnail Description:</h4>
+<%= f.text_area :thumbnail_text, class:"form-control"  %>
+<br>
+<h4>Room Price:</h4>
+<%= f.number_field :room_price, :step => 1, class:"form-control"  %> / month
+<br>
+<h4>Room Owner (Must be Profile Holder):</h4>
+<%= f.text_area :owner_name, :value => current_user.name, class:"form-control" %>
+<br>
+<%= f.submit "Submit Application for Room", class: 'btn btn-primary' %>
+</div>
+<% end %>
+</div>
+<% end %>

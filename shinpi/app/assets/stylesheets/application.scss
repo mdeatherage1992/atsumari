@@ -1,0 +1,299 @@
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import 'bootstrap/theme';
+@import "neat";
+
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+//= require foundation_and_overrides
+
+ */
+
+#act-heads {
+  margin-right: 20px;
+}
+#principal {
+  border: solid;
+}
+#green-man {
+background-color: green;
+border: solid;
+}
+#red-man {
+background-color: red;
+border: solid;
+}
+#yellow-man {
+background-color: yellow;
+border: solid;
+}
+th {
+  border:solid;
+  width: 100px;
+}
+
+#glossary {
+  display:flex;
+  flex-wrap: flex;
+}
+
+
+.actvities-room {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  align-items: flex;
+  left: 380px;
+}
+
+.actvities-home {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  align-items: flex;
+  left: 310px;
+}
+
+
+
+
+ #shinpi-table {
+   background-color: black;
+   color: #f7f300;
+ }
+
+ .profiles {
+   display:flex;
+   flex-wrap:wrap;
+ }
+
+
+
+ #room-show-head {
+   position:relative;
+  left: 15px;
+ }
+
+
+
+section.well {
+  position:relative;
+  right: 30px;
+  width: 290px;
+  height: 270px;
+}
+ textarea {
+   text-align: center;
+ }
+
+  .profile-container {
+    position: relative;
+    left: 320px;
+    width: 700px;
+    align-items:center;
+  }
+
+form {
+align-items: center;
+position: relative;
+
+}
+#search-bar {
+  width: 500px;
+  height: 40px;
+}
+ table.dataTable thead .sorting:after,
+ table.dataTable thead .sorting:before,
+ table.dataTable thead .sorting_asc:after,
+ table.dataTable thead .sorting_asc:before,
+ table.dataTable thead .sorting_asc_disabled:after,
+ table.dataTable thead .sorting_asc_disabled:before,
+ table.dataTable thead .sorting_desc:after,
+ table.dataTable thead .sorting_desc:before,
+ table.dataTable thead .sorting_desc_disabled:after,
+ table.dataTable thead .sorting_desc_disabled:before {
+   bottom: .5em;
+ }
+
+ table {
+   background-color: white;
+ }
+
+
+
+ figure img{
+  position: relative;
+  left: 70px;
+
+  }
+
+dt{
+   text-align:left !important;
+     width:37% !important;
+
+
+    }
+    dd{
+     margin-left:2% !important;
+    }
+
+.well {
+  width: 300px;
+}
+
+.background-img {
+position:absolute;
+z-index:-1;
+top:0;
+left:0;
+min-width: 4076px;
+min-height: 500px;
+opacity: 0.5;
+}
+
+#post-forum {
+  position: relative;
+  left:20px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  background-color: #2196F3;
+  padding: 10px;
+}
+.container {
+  font-family: 'Cinzel', serif;
+}
+
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+.shinpi-headings {
+  text-align:center;
+  border-style: solid ;
+  color: black;
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  width:1100px;
+  position: relative;
+  right: 20px;
+  opacity:1;
+  padding-bottom: 20px;
+}
+
+.logo-left {
+  position: relative;
+  float: left;
+}
+
+.logo-right {
+  position: relative;
+  float: right;
+}
+
+.shinpi-headings h5 {
+  font-size: 1.8em;
+}
+
+.shinpi-headings:hover {
+  opacity:1;
+}
+
+
+.alert-alert {
+  @extend .alert-warning;
+}
+.home-describe {
+  position: relative;
+  top: 120px;
+  left: 200px;
+}
+
+.homepage-header {
+  font-size: 8em;
+  position: absolute;
+  left: 400px;
+}
+
+
+.alert-notice {
+  @extend .alert-info;
+}
+
+#tango{
+  width: 300px;
+}
+
+
+
+ textarea {
+resize: none;
+width: 200px;
+height: 50px;
+}
+
+nav {
+    font-family: 'Cinzel', serif;
+}
+
+
+.room-cards {
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  left: 350px;
+  width: 1500px;
+}
+.left-profile-modal {
+  position: relative;
+
+}
+.proflile-table {
+  position: relative;
+  bottom: 350px;
+  left: 50px;
+}
+.modal-body {
+  height: 250px;
+}
+.modal-body table {
+ position: relative;
+ left: 250px;
+ bottom: 170px;
+}
+
+
+
+td {
+  border: solid;
+}
+
+
+.card {
+  margin-right: 30px;
+  margin-bottom: 30px;
+}
+
+.card-img-top {
+  height: 40px;
+  width: 100px;
+}

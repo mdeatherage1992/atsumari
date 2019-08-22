@@ -1,0 +1,37 @@
+<h1> User Profile </h1>
+<%= form_for(@user) do |f| %>
+   <%= render 'shared/error_messages' %>
+
+   <%= f.label :name %>
+   <%= f.text_field :name, class: 'form-control' %>
+
+   <%= f.label :email %>
+   <%= f.email_field :email, class: 'form-control' %>
+
+   <%= f.label :bio %>
+   <%= f.text_area :bio %>
+
+   <% f.label :industry %>
+   <%= f.checkbox "Finance" %>
+   <%= f.checkbox "Technology" %>
+   <%= f.checkbox "Betting" %>
+   <%= f.checkbox "Other" %>
+   <h5>Years of Experience</h5>
+   <%= f.number_field :experience_in_industry %>
+
+   <h5>Links</h5>
+   <p>GitHub</p>
+   <%= f.text_field :github %>
+   <p>Linkedin</p>
+   <%= f.text_field :linkedin %>
+   <p>Seeking Alpha</p>
+   <%= f.text_field :s_a %>
+
+   <%= f.label :password %>
+   <%= f.password_field :password, class: 'form-control' %>
+
+   <%= f.label :password_confirmation, "Confirmation" %>
+   <%= f.password_field :password_confirmation, class: 'form-control' %>
+
+   <%= f.submit "Save changes", class: "btn btn-primary" %>
+ <% end %>

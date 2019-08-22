@@ -1,0 +1,16 @@
+ 
+<h1> New Privilege for Room </h1>
+<div class="shinpi-headings">
+<%= form_for [@room,@privilege] do |f| %>
+<h3>Summary</h3>
+<%= @room.name  %>
+<%= f.number_field :room_id, :value => @room.id,:readonly => true %><br>
+<%= @user.name %>
+<%= f.number_field :user_id, :value => @user.id,:readonly => true %>
+<h4>Check for Public Account Access</h4>
+  <%= f.check_box :public %>
+<h3>Monthly Payment</h3>
+<h5>$<%= @room.room_price %></h5>
+<%= f.submit "Gain Privilege", class: 'btn btn-primary btn-lg' %>
+<% end %>
+</div>

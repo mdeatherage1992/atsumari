@@ -1,0 +1,36 @@
+
+<h1>Spectated Rooms</h1>
+<table id="dtBasicExample" class="table table-striped sortable" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Name
+      </th>
+      <th class="th-sm">Type
+      </th>
+      <th class="th-sm">Spectators
+      </th>
+      <th class="th-sm"> Room Price
+      </th>
+      <th class="th-sm">Confirmed Revenue($)
+      </th>
+      <th class="th-sm"> Owner Name
+      </th>
+      <th class="th-sm"> Room Start Date
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @all.each do |t| %>
+    <div>
+      <tr>
+      <td><%= link_to t.name, room_path(t) %></td>
+      <td><%= t.room_type.capitalize %></td>
+      <td><%= t.head_count || 0 %> People</td>
+      <td>$<%= t.room_price || 0 %></td>
+      <td>$<%= t.confirmed_revenue || 0 %></td>
+      <td><%= t.owner_name || "Owner Withheld" %></td>
+      <td><%= t.created_at %></td>
+      </div>
+      <tr>
+  <% end %>
+</table>

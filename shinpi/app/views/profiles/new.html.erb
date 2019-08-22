@@ -1,0 +1,30 @@
+<h1>New Profile Page</h1>
+<div class="new-profile">
+
+
+<%= form_for [@user,@profile] do |f| %>
+<%= f.label :bio %><br>
+<%= f.text_area :bio, class:"form-control" %>
+<br>
+<%= f.label :industry %><br>
+<%= f.text_area :industry, class:"form-control" %>
+<br>
+<%= f.label :experience_in_industry %><br>
+<%= f.number_field :experience_in_industry, :step => 0.5, class:"form-control"  %>
+<br>
+<%= f.label :github %><br>
+<%= f.text_area :github, class:"form-control" %>
+<br>
+<%= f.label :linkedin %><br>
+<%= f.text_area :linkedin, class:"form-control" %>
+<br>
+<%= f.label :seeking_alpha %><br>
+<%= f.text_area :seeking_alpha, class:"form-control" %>
+<br>
+<%= f.label :website %><br>
+<%= f.text_area :website, class:"form-control" %>
+<br>
+<%= f.submit "Submit", class: 'btn btn-primary'  %>
+
+<% end %>
+</div>

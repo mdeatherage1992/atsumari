@@ -1,0 +1,49 @@
+<h1> New Activity for Room </h1>
+<div class="shinpi-headings">
+<%= form_for [@room,@activity] do |f| %>
+<h3>Summary</h3>
+<h5>Note: Activity will be confirmed at close of day on the time marked</h5>
+<h5>You can close the wager at any time if it trades, at close of day NAV</h5>
+<h5>Non Trading activities cannot be cancelled.</h5>
+<%= f.number_field :room_id, :value => @room.id, :readonly => true, :hidden => true  %><br>
+<%= f.number_field :user_id, :value => @user.id, :readonly => true, :hidden => true %>
+<div class="boolean-field">
+<center>
+<table>
+<tr>
+  <th><h3>What is the Wager on?</h3></th>
+  <td><center><%= f.text_field :principal, class:"form-group" %></center></td>
+<tr>
+<th><h3>Trading Wager?</h3></th>
+<td>Check Here: <%= f.check_box :trading %></td>
+</tr>
+<tr>
+<th><h3>at what Price or Line?</h3></th>
+<td>Price/Line: <%= f.number_field :price, :step => 5.5 %></td>
+</tr>
+
+<tr>
+<th><h3>Buy Order?</h3></th>
+<td>Check Here: <%= f.check_box :buy %></td>
+</tr>
+
+<tr>
+<th><h3>Sell Order?</h3></th>
+<td>Check Here: <%= f.check_box :sell %></td>
+</tr>
+
+<tr>
+<th><h3> Wager?</h3></th>
+<td>Check Here: <%= f.check_box :wager %></td>
+</tr>
+</table>
+</center>
+<h3>Wager Size</h3>
+</div>
+<%= f.number_field :wager_size, :step => 100 %>
+<h3>Contract Until Date</h3>
+<%= f.date_field :wager_contract_end %><br>
+
+<%= f.submit "Record Activity", class: 'btn btn-primary btn-lg' %>
+<% end %>
+</div>

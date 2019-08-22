@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Atsumari</title>
+
+
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <link href="https://fonts.googleapis.com/css?family=Cinzel" rel="stylesheet">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse">
+  <div class="container">
+    <div class="navbar-header">
+      <%= link_to 'Atsumari', root_path, class: 'navbar-brand' %>
+    </div>
+    <div id="navbar">
+      <ul class="nav navbar-nav">
+        <li><%= link_to 'Public Forums', root_path %></li>
+      </ul>
+
+      <ul class="nav navbar-nav pull-center">
+      <li class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        Gambling
+        <span class="caret"></span>
+      </a>
+      <ul class="dropdown-menu" role="menu">
+        <li><%= link_to 'Gambling Rooms', gambling_rooms_path, method: :get  %></li>
+        <li><%= link_to 'Gambling Profiles', gambling_profiles_path, method: :get  %></li>
+        <li><%= link_to 'Gambling Rankings', gambling_rankings_path, method: :get  %></li>
+        </ul>
+        </li>
+
+        <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          Finance
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu" role="menu">
+          <li><%= link_to 'Finance Rooms',finance_rooms_path, method: :get  %></li>
+          <li><%= link_to 'Finance Profiles' , finance_profiles_path, method: :get  %></li>
+          <li><%= link_to 'Finance Rankings' , finance_rankings_path, method: :get  %></li>
+          </ul>
+          </li>
+
+          <li class="dropdown">
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            Sports
+            <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu" role="menu">
+            <li><%= link_to 'Sports Rooms',sports_rooms_path, method: :get  %></li>
+            <li><%= link_to 'Sports Profiles', sports_profiles_path, method: :get   %></li>
+            <li><%= link_to 'Sports Rankings', sports_rankings_path, method: :get   %></li>
+            </ul>
+            </li>
+            <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              Politics
+              <span class="caret"></span>
+            </a>
+          <ul class="dropdown-menu" role="menu">
+              <li><%= link_to 'Politics Rooms',politics_rooms_path, method: :get  %></li>
+              <li><%= link_to 'Politics Profiles', politics_profiles_path, method: :get   %></li>
+              <li><%= link_to 'Politics Rankings', politics_rankings_path, method: :get   %></li>
+          </ul>
+          </li>
+          </ul>
+      <ul class="nav navbar-nav pull-right">
+        <% if user_signed_in? %>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <%= current_user.name %>
+              <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu" role="menu">
+              <% if user_signed_in? %>
+              <% end %>
+              <li><%= link_to 'Account', edit_user_registration_path %></li>
+              <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+            </ul>
+          </li>
+        <% else %>
+          <li><%= link_to 'Log In', new_user_session_path %></li>
+          <li><%= link_to 'Sign Up', new_user_registration_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+    <div class="container">
+  <% flash.each do |key, value| %>
+    <div class="alert alert-<%= key %>">
+      <%= value %>
+    </div>
+  <% end %>
+</div>
+
+<%= yield :top_content %>
+
+<div class="container">
+    <h1><%= yield :header %></h1>
+  <%= yield %>
+</div>
+  </body>
+</html>

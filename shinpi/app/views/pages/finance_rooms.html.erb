@@ -1,0 +1,45 @@
+<head>
+  <script>
+  $(document).ready(function () {
+  $('#dtBasicExample').DataTable();
+  $('.dataTables_length').addClass('bs-select');
+  });
+  </script>
+</head>
+
+<h1>Finance Rooms</h1>
+ 
+<table id="dtBasicExample" class="table table-striped sortable" cellspacing="0" width="100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Name
+      </th>
+      <th class="th-sm">Type
+      </th>
+      <th class="th-sm">Spectators
+      </th>
+      <th class="th-sm"> Room Price
+      </th>
+      <th class="th-sm">Confirmed Revenue($)
+      </th>
+      <th class="th-sm"> Owner Name
+      </th>
+      <th class="th-sm"> Room Start Date
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @finance_rooms.each do |t| %>
+    <div>
+      <tr>
+      <td><%= link_to t.name, room_path(t.id) %></td>
+      <td><%= t.room_type.capitalize %></td>
+      <td><%= t.head_count %></td>
+      <td><%= t.room_price %></td>
+      <td><%= t.confirmed_revenue %></td>
+      <td><%= t.owner_name %></td>
+      <td><%= t.created_at %></td>
+      </div>
+      <tr>
+  <% end %>
+</table>

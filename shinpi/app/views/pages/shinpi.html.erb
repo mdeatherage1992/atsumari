@@ -1,0 +1,170 @@
+
+<div>
+<h1 class="homepage-header">Atsumari</h1>
+<h2 class="home-describe">Where Information is not created equal.</h2>
+</div>
+
+<br><br><br><br><br><br>
+    <% if !current_user %>
+    <div class="shinpi-headings">
+    <p class="logo-right">集まり</p>
+    <p class="logo-left">集まり</p>
+    <h6></h6>
+    <br>
+    <h5>
+    1.Spectating is a right, contributing is a privlege. To participate in public rooms,
+    you must host a successful room on that topic.
+    </h5>
+    <br>
+    <h5>
+    2.Information is valuable. All rooms have full control over how the group operates.
+    All rooms have the ability to confirm their bets,trades, which will be advertised in aggregate.
+    </h5>
+    <br>
+    <h5>
+    3. The only groups on Atsumari are financially productive. People pay for information, not bullshit.
+    There are no "misc." groups, and politics is on thin ice.
+    </h5>
+    <br>
+    <h5>
+    4. Atsumari serves it's profile holders, and no one else. Profile holders are room owners. Room owners together will eventually
+    dictate how Atsumari runs.
+    </h5>
+    <br>
+    <br>
+    <h5>Agree?</h5>
+    <h5>New Users (Group Owners and Group Spectators)</h5>
+    <h5>
+      <%= link_to 'Register', new_user_registration_path, class: 'btn btn-primary btn-lg' %>
+    </h5>
+    <% else %>
+    <div class="shinpi-headings">
+    <p class="logo-right">集まり</p>
+    <p class="logo-left">集まり</p>
+    <h2> Welcome <%=current_user.name%></h2>
+    <h4>Recent Activity on your Boards</h4>
+    <% if @activities %>
+    <div class="actvities-home">
+      <center>
+        <h3>Open Room Wagers</h3>
+      <table>
+        <tr id="act-heads">
+        <th >Symbol</th>
+        <th>Room</th>
+        <th>Wager</th>
+        <th>Expires</th>
+        </tr>
+      <% @activities.each do |x| %>
+      <% x.each do |y| %>
+      <tr>
+      <th id="principal"><%= y.principal %></th>
+      <th id="principal"><%= Room.where(id: y.room_id)[0].name.capitalize %></th>
+      <% if y.buy %>
+      <th id="green-man">$<%= y.wager_size %></th>
+      <% end %>
+      <% if y.sell %>
+      <td id="red-man">$<%= y.wager_size %></td>
+      <% end %>
+      <% if y.wager %>
+      <td id="yellow-man">$<%= y.wager_size %></td>
+      <% end %>
+      <td><%= y.wager_contract_end %></td>
+      <% end %>
+      <% end %>
+      </tr>
+      </table>
+      <span id="glossary"><p>Red = Sell</p>//
+      <p>Green = Buy</p>//
+      <p>Yellow = Wager</p></span>
+      <h3>Open Activities</h3>
+      </center>
+
+    </div>
+    <% end %>
+    <% if current_user %>
+    <% if !current_user.profile %>
+    <%= link_to "Create a Room Owner Profile", new_user_profile_path(@user),class: 'btn btn-primary btn-lg' %>
+    <%= link_to "View your Rooms", user_rooms_path(@user),class: 'btn btn-primary btn-lg' %>
+    <% else %>
+    <%= link_to "View your Owner Profile", user_profile_path(@user,@profile.id),class: 'btn btn-primary btn-lg' %>
+    <%= link_to "Search Profiles", profiles_path ,class: 'btn btn-primary btn-lg' %>
+    <%= link_to "Your Spectated Rooms", user_spectations_path(@user),class: 'btn btn-primary btn-lg' %>
+    <% if @rooms.length > 0 %>
+    <h1>Your Owned Rooms</h1>
+    <table id="shinpi-table" class="table table-striped sortable" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th class="th-sm">Name
+          </th>
+          <th class="th-sm">Type
+          </th>
+          <th class="th-sm">Spectators
+          </th>
+          <th class="th-sm"> Room Price
+          </th>
+          <th class="th-sm">Confirmed Revenue($)
+          </th>
+          <th class="th-sm"> Owner Name
+          </th>
+          <th class="th-sm"> Room Start Date
+          </th>
+        </tr>
+      </thead>
+      <tbody id="shinpi-table">
+        <% @rooms.each do |t| %>
+        <div>
+          <tr id="shinpi-table">
+          <td><%= link_to t.name, room_path(t) %></td>
+          <td><%= t.room_type.capitalize %></td>
+          <td><%= t.head_count || 0 %> People</td>
+          <td>$<%= t.room_price || 0 %></td>
+          <td>$<%= t.confirmed_revenue || 0 %></td>
+          <td><%= t.owner_name.capitalize %></td>
+          <td><%= t.created_at %></td>
+          </div>
+          <tr>
+      <% end %>
+    </table>
+    <h1>Your Spectated Rooms</h1>
+    <table id="shinpi-table" class="table table-striped sortable" cellspacing="0" width="100%">
+      <thead>
+        <tr>
+          <th class="th-sm">Name
+          </th>
+          <th class="th-sm">Type
+          </th>
+          <th class="th-sm">Spectators
+          </th>
+          <th class="th-sm"> Room Price
+          </th>
+          <th class="th-sm">Confirmed Revenue($)
+          </th>
+          <th class="th-sm"> Owner Name
+          </th>
+          <th class="th-sm"> Room Start Date
+          </th>
+        </tr>
+      </thead>
+      <tbody id="shinpi-table">
+        <% @spectated.each do |t| %>
+        <div>
+          <tr id="shinpi-table">
+          <td><%= link_to t.name, room_path(t) %></td>
+          <td><%= t.room_type.capitalize %></td>
+          <td><%= t.head_count || 0 %> People</td>
+          <td>$<%= t.room_price || 0 %></td>
+          <td>$<%= t.confirmed_revenue || 0 %></td>
+          <td><%= t.owner_name || "Undefined Owner" %></td>
+          <td><%= t.created_at %></td>
+          </div>
+          <tr>
+      <% end %>
+    </table>
+    <% end %>
+    <% end %>
+    <% end %>
+    </div>
+  </div>
+
+</div>
+<% end %>

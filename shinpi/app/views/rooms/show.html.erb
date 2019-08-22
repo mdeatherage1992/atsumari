@@ -1,0 +1,179 @@
+
+<% if !@user_privilege %>
+<div id="room-show-head" class="shinpi-headings">
+<h1><u> <%= @room.name %></u></h1>
+<h3>Please Sign in to View Content from <%= @room.name %></h3>
+<h5>Confirmed Revenue: $<%= @room.confirmed_revenue || 0 %>  </h5>
+<%= link_to "Get Access Privileges", new_room_privilege_path(@room), class: "btn btn-primary btn-md" %>
+</div>
+<% end %>
+
+<% if @user_privilege %>
+<div id="room-show-head" class="shinpi-headings">
+<h1> <%= @room.name %></h1>
+<% if @user_private == @user_privilege %>
+<h5>Owner Room Wager</h5>
+<%= link_to "New Room Wager", new_room_activity_path(@room), class: "btn btn-primary btn-md"  %>
+<% end %>
+<h5>Confirmed Revenue: $<%= @room.confirmed_revenue || 0 %>  </h5>
+<%= link_to "View Access Privileges", room_privilege_path(@room,@user), class: "btn btn-primary btn-md" %>
+</div>
+<section class="row clearfix">
+<section class="col-md-12 column">
+<nav class="navbar navbar-default" role="navigation">
+<div class="container-fluid">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header">
+<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand" href="#"> <%= @room.name %> </a>
+</div>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<form class="navbar-form navbar-left" role="search">
+<div class="form-group">
+<input id="search-bar"type="text" class="form-control" placeholder="Search in this post...">
+</div>
+<button type="submit" class="btn btn-default"><i class="fa fa-search"></i>Search</button>
+</form>
+</div><!-- /.navbar-collapse -->
+</div><!-- /.container-fluid -->
+</nav>
+<% if @activities %>
+<div class="actvities-room">
+  <center>
+    <h3>Open Room Wagers</h3>
+  <table>
+    <tr id="act-heads">
+    <th >Symbol</th>
+    <th>Wager</th>
+    <th>Expires</th>
+    </tr>
+  <% @activities.each do |x| %>
+  <tr>
+  <th id="principal"><%= x.principal %></th>
+  <% if x.buy %>
+  <th id="green-man">$<%= x.wager_size %></th>
+  <% end %>
+  <% if x.sell %>
+  <td id="red-man">$<%= x.wager_size %></td>
+  <% end %>
+  <% if x.wager %>
+  <td id="yellow-man">$<%= x.wager_size %></td>
+  <% end %>
+  <td><%= x.wager_contract_end %></td>
+  <% end %>
+  </tr>
+  </table>
+  <span id="glossary"><p>Red = Sell</p>//
+  <p>Green = Buy</p>//
+  <p>Yellow = Wager</p></span>
+  <h3>Open Activities</h3>
+  </center>
+
+</div>
+<% end %>
+<% if @room.posts %>
+<% @room.posts.each do |t| %>
+<% @user = User.find_by(id: t.user_id) %>
+<% profile = Profile.find_by(user_id: @user.id) %>
+<div class="row clearfix">
+<div class="col-md-12 column">
+<div class="panel panel-default">
+<div class="panel-heading">
+  <time class="pull-right">
+  <i class="fa fa-calendar"></i><%= time_ago_in_words(t.created_at)%>
+  </time>
+  <abbr title="count of posts in this topic"><%= t.id %></abbr>
+<section class="panel-title">
+<section class="pull-left" id="id">
+</section>
+</section>
+</div>
+<section class="row panel-body">
+<section class="col-md-9">
+<h2> <i class="fa fa-smile-o"></i> <%= @user.name.capitalize %> 's Post </h2>
+<hr> <%= t.content %>
+</section>
+<section id="user-description" class="col-md-3 ">
+<section class="well">
+<div class="dropdown">
+<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cricle"><%= @user.name %></i><span class="caret"></span></a>
+<ul class="dropdown-menu" role="menu">
+<li><a href="#"><i class="fa fa-user"></i> See profile</a></li>
+<li><a href="#"><i class="fa fa-envelope"></i> Send PM</a></li>
+<li><a href="#"><i class="fa fa-code"></i>View all Articles</a></li>
+<li><a href="#"><i class="fa fa-th-list"></i>View all Posts</a></li>
+<li class="divider"></li>
+<li><a href="#"><i class="fa fa-plus"></i>Add to contact List</a></li>
+<li class="divider"></li>
+<li><a href="#"><i class="fa fa-cogs"></i> Manage User (for adminstrator)</a></li>
+</ul>
+</div>
+		<!-- block for poster  -->
+<figure id="whiskey-tango-figure">
+<img class="img-rounded img-responsive" src="http://www.webdesignforums.net/img/wdf_avatar.jpg" >
+<figcaption class="text-center"><%= @user.name %>  <br><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i> </figcaption>
+</figure>
+<dl class="dl-horizontal">
+<dt>Joined</dt>
+<dd><%= time_ago_in_words(@user.created_at) %> ago</dd>
+<dt>Revenue:</dt>
+<dd>$<%= profile.total_confirmed_revenue || 0 %></dd>
+<dt>Spectators:</dt>
+<dd><%= profile.total_spectators || 0 %> People</dd>
+</dl>
+</section>
+</section>
+</section>
+<div class="panel-footer">
+<div class="row">
+<section class="col-md-2 ">
+<i class="fa fa-thumbs-up "></i><a href="#"> Thanks </a>| <i class="fa fa-warning "></i><a href="#"> Report </a>
+</section>
+<section id="thanks" class="col-md-6">
+<small><a href="#" data-toggle="tooltip" title="You and david,ehsan,john doe">  who L<i class="fa fa-heart "></i>ve this!</a> </small><br>
+
+</section>
+<section class="col-md-4">
+<span class="fa-stack">
+<i class="fa fa-quote-right fa-stack-1x"></i>
+<i class="fa fa-comment-o fa-lg fa-stack-1x"></i>
+</span>
+<button class="btn btn-success btn-xl" data-toggle="modal" data-target="#approvalModal">
+  Reply
+</button>
+<button class="btn btn-success btn-xl" data-toggle="modal" data-target="#approvalModal">
+  Edit
+</button>
+</section>
+</div>
+</div>
+</div>
+</div>
+</div>
+<% end %>
+<% else %>
+<h1>No Posts in this Group yet</h1>
+<% end %>
+<div id="post-forum"class="shinpi-headings">
+<%= form_for [@room,@post] do |l| %>
+<%= l.label :content %>
+<%= l.text_area :content, class:"form-control" %>
+<%= l.submit "Post in Room", class: 'btn btn-primary btn-md' %>
+<% end %>
+</div>
+</section>
+</section>
+</section>
+<% end %>
+<footer class="page-footer">
+
+  <div class="footer-copyright text-center py-3">© 2018 Copyright:
+    <a href="https://mdbootstrap.com/education/bootstrap/"> Astsumari </a>
+  </div>
+</footer>

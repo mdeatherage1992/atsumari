@@ -1,0 +1,38 @@
+<h1>Finance Profiles</h1>
+
+<% @gambling_profiles.each do |t| %>
+<section class="well">
+<figure>
+<img class="img-rounded img-responsive" src="http://www.webdesignforums.net/img/wdf_avatar.jpg">
+<figcaption class="text-center"> <%= User.find_by(id: t.user_id).name  %> <br><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-half"></i> </figcaption>
+</figure>
+<dl class="dl-horizontal">
+<dt>Joined:</dt>
+<dd><%= time_ago_in_words(User.find_by(id: t.user_id).created_at)%></dd>
+<dt>Posts:</dt>
+<dd><%= Post.where(user_id: t.user_id).count || 0 %></dd>
+<dt>Spectators:</dt>
+<dd>
+<% all = 0 %>
+<% Privilege.where(user_id: t.user_id, owner:true).each do |g| %>
+<% Room.where(id: g.room_id).each do |f| %>
+
+<% all +=  f.head_count.to_i %>
+<% end %>
+<% end %>
+<%= all %>
+</dd>
+<dt>Revenue:</dt>
+<dd>
+  <% all = 0 %>
+  <% Privilege.where(user_id: t.user_id, owner:true).each do |g| %>
+  <% Room.where(id: g.room_id).each do |f| %>
+  <% all +=  f.confirmed_revenue.to_i %>
+  <% end %>
+  <% end %>
+  $<%= all %>
+</dd>
+<%= link_to "Visit Profile",  user_profile_path(@user,t), class: 'btn btn-primary btn-sm',id:"profile-button" %>
+</dl>
+</section>
+<% end %>

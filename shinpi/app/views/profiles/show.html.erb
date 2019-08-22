@@ -1,0 +1,79 @@
+<head>
+   <tdnk href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+</head>
+<div class="profile-container">
+  <h1><%= @user.name%>'s Profile</h1>
+  <% if current_user.id === @user.id %>
+  <%= link_to "Create a Room", new_room_path, class: 'btn btn-primary btn-lg' %>
+  <%= link_to "Edit Profile", edit_user_profile_path(@user,@profile), class: 'btn btn-primary btn-lg' %>
+  <% end %>
+    <div class="span3 well">
+        <center>
+        <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" class="img-circle"></a>
+        <h3><%= @user.name %></h3>
+        <h3>Confirmed Revenue: $<%= @profile.total_confirmed_revenue || 0 %></h3>
+        <em>click my face for more</em>
+		</center>
+    </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                    <h4 class="modal-title" id="myModalLabel"> More About <%= @user.name %> </h4>
+                    </div>
+                <div class="modal-body">
+                  <left class="left-profile-modal">
+                    <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRbezqZpEuwGSvitKy3wrwnth5kysKdRqBW54cAszm_wiutku3R" name="aboutme" width="140" height="140" border="0" class="img-circle"></a>
+                    <h3 class="media-heading"><%= @user.name %><br><small>USA</small></h3>
+                      <table class="profile-table">
+                      <tr>
+                         <th>Industry</th>
+                         <td><%=@profile.industry%></td>
+                      </tr>
+                        <tr>
+                         <th>Experience</th>
+                          <td><%=@profile.experience_in_industry%></td>
+                         </tr>
+                         <tr>
+                         <th>User Since</th>
+                         <td><%= time_ago_in_words(@user.created_at)%></td>
+                         </tr>
+                         <tr>
+                         <th>Total Spectators</th>
+                          <td><%= @profile.total_spectators || 0 %> People</td>
+                         </tr>
+                         <tr>
+                         <th>Total Revenue</th>
+                         <td>$<%= @profile.total_confirmed_revenue%></td>
+                         </tr>
+                         <tr>
+                         <th>Github</th>
+                              <td><%= @profile.github%></td>
+                         </tr>
+                         <tr>
+                         <th>Linkedin</th>
+                         <td><%= @profile.linkedin%></td>
+                         </tr>
+                         <tr>
+                         <th>Biography</th>
+                         <td><%= @profile.bio%></td>
+                         </tr>
+                      </table>
+                    </left>
+                </div>
+                <div class="modal-footer">
+                    <center>
+                    <button aria-hidden="true"type="button" class="close" data-dismiss="modal" >Exit</button>
+                    </center>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <h3>More Users Like <%= @user.name %>:</h3>
